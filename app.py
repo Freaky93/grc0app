@@ -98,8 +98,8 @@ def login():
         if user and check_password_hash(user.password, password):
             login_user(user)
             return redirect(url_for('dashboard'))
-        return render_template('login.html', error="Invalid credentials")
-    return render_template('login.html')
+        return render_template('index.html', error="Invalid credentials")
+    return render_template('index.html')
 
 # ---------- LOGOUT ----------
 @app.route('/logout')
