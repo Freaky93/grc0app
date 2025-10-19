@@ -143,6 +143,8 @@ input:focus, textarea:focus {
   h1 { font-size: 1.6rem; }
 }
 
+
+
 </style>
 
 </head>
@@ -166,7 +168,11 @@ input:focus, textarea:focus {
     <h2>Add New Template</h2>
 <input id="tplName" type="text" placeholder="Template name" required><br><br>
 <textarea id="tplContent" rows="4" cols="50" placeholder="Template content (use [EMPTY] where you want boxes)" required></textarea><br>
+<p style="border-bottom: 2px solid #90caf9; padding-bottom: 5px; width: 100%;">
+  Template content (use [EMPTY] where you want boxes)
+</p>
 <button id="saveBtn" class="btn" type="button">Save Template</button>
+
 
 <script>
 document.getElementById('saveBtn').addEventListener('click', async () => {
