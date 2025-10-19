@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Forgot Password - GRC Statements</title>
+ <style>
+  :root {
+    --neon-cyan: #00e0ff;
+    --neon-pink: #ff00f7;
+    --bg-dark: #0a0f1f;
+    --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
+    --text-light: #eaf6ff;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: var(--text-light);
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  .card {
+    width: 380px;
+    background: rgba(16, 24, 48, 0.9);
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 0 25px rgba(255, 0, 247, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    animation: slideIn 0.5s ease-out;
+  }
+
+  h2 {
+    margin: 0 0 16px;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 25px var(--neon-cyan);
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    margin-top: 10px;
+    background: #0f1525;
+    color: #fff;
+    font-size: 1em;
+    transition: 0.3s ease;
+    box-shadow: 0 0 8px rgba(255, 0, 247, 0.1);
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 12px var(--neon-pink);
+  }
+
+  .btn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 0 15px rgba(255, 0, 247, 0.2);
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px var(--neon-pink);
+  }
+
+  .msg {
+    margin-top: 12px;
+    color: #7fffd4;
+    text-shadow: 0 0 8px var(--neon-cyan);
+  }
+
+  .error {
+    margin-top: 12px;
+    color: #ff6b6b;
+    text-shadow: 0 0 6px rgba(255, 107, 107, 0.6);
+  }
+
+  a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    margin-top: 16px;
+    transition: 0.25s ease;
+  }
+
+  a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+</head>
+<body>
+  <div class="card">
+    <h2>Forgot Password</h2>
+    <form method="post">
+      <label>Enter your registered email</label>
+      <input type="email" name="email" required>
+      <button class="btn" type="submit">Send Reset Link</button>
+    </form>
+    {% if message %}<div class="msg">{{ message }}</div>{% endif %}
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+    <a href="{{ url_for('login') }}">← Back to login</a>
+  </div>
+</body>
+</html>

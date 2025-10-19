@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Login - GRC Statements</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+ <style>
+  :root {
+    --neon-cyan: #00e0ff;
+    --neon-pink: #ff00f7;
+    --bg-dark: #0a0f1f;
+    --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
+    --text-light: #eaf6ff;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Inter", "Roboto", sans-serif;
+    background: var(--bg-gradient);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-light);
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  /* ---------------- Navbar ---------------- */
+  .navbar {
+    width: 100%;
+    height: 60px;
+    background: rgba(11, 26, 58, 0.95);
+    color: var(--neon-cyan);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 20px rgba(0, 224, 255, 0.25);
+    z-index: 10;
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 25px var(--neon-cyan);
+  }
+
+  .navbar .brand {
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+  }
+
+  .navbar a.signup-btn {
+    background: transparent;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 10px rgba(0, 224, 255, 0.2);
+  }
+
+  .navbar a.signup-btn:hover {
+    background: var(--neon-pink);
+    color: #fff;
+    box-shadow: 0 0 20px var(--neon-pink);
+  }
+
+  /* ---------------- Card ---------------- */
+  .card {
+    width: 360px;
+    background: rgba(16, 24, 48, 0.9);
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 0, 247, 0.15);
+    padding: 40px;
+    margin-top: 120px; /* Push below navbar */
+    animation: fadeInCard 0.5s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+  }
+
+  h2 {
+    margin: 0 0 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--neon-cyan);
+   
+  }
+
+  label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #ddd;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    margin-top: 6px;
+    background: #0f1525;
+    color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 0 8px rgba(255, 0, 247, 0.1);
+    transition: 0.3s ease;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 12px var(--neon-pink);
+  }
+
+  .forgot {
+    font-size: 0.95em;
+    text-align: right;
+    margin-top: 8px;
+  }
+
+  .forgot a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s ease;
+  }
+
+  .forgot a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 8px var(--neon-pink);
+  }
+
+  .btn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 0 15px rgba(255, 0, 247, 0.2);
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px var(--neon-pink);
+  }
+
+  .muted {
+    color: #a3a7c2;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 0.95em;
+  }
+
+  a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s ease;
+  }
+
+  a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+  }
+
+  .error {
+    color: #ff6b6b;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* ---------------- Animations ---------------- */
+  @keyframes fadeInCard {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="brand">GRC Statements</div>
+    <a href="{{ url_for('signup') }}" class="signup-btn">Create Account</a>
+  </div>
+
+  <!-- Login Card -->
+  <div class="card">
+    <h2>Login</h2>
+
+    <form method="post">
+      <label>Username</label>
+      <input name="username" required>
+
+      <label>Password</label>
+      <input name="password" type="password" required>
+
+      <div class="forgot">
+        <a href="{{ url_for('forgot') }}">Forgot password?</a>
+      </div>
+
+      <button class="btn" type="submit">Sign in</button>
+    </form>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <div class="muted">
+      Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a>
+    </div>
+  </div>
+
+</body>
+</html>

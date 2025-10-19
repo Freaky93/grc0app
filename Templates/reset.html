@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reset Password - GRC Statements</title>
+  <style>
+  :root {
+    --neon-cyan: #00e0ff;
+    --neon-pink: #ff00f7;
+    --bg-dark: #0a0f1f;
+    --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
+    --text-light: #eaf6ff;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: var(--text-light);
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  .card {
+    width: 360px;
+    background: rgba(16, 24, 48, 0.9);
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 0 25px rgba(255, 0, 247, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    animation: popupIn 0.4s ease-out;
+  }
+
+  h2 {
+    margin: 0 0 16px;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-pink);
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    margin-top: 8px;
+    background: rgba(15, 22, 40, 0.9);
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 224, 255, 0.15);
+  }
+
+  input:focus {
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 12px var(--neon-pink);
+    outline: none;
+  }
+
+  .btn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 15px rgba(255, 0, 247, 0.2);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px var(--neon-pink);
+  }
+
+  .error {
+    margin-top: 10px;
+    color: #ff6b6b;
+    text-shadow: 0 0 6px #ff6b6b;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popupIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+</head>
+<body>
+  <div class="card">
+    <h2>Reset Password</h2>
+    <form method="post">
+      <label>New Password</label>
+      <input type="password" name="password" required>
+      <label>Confirm Password</label>
+      <input type="password" name="confirm" required>
+      <button class="btn" type="submit">Reset Password</button>
+    </form>
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  </div>
+</body>
+</html>

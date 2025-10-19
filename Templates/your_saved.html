@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Your Saved Statements</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  :root {
+    --neon-cyan: #00e0ff;
+    --neon-pink: #ff00f7;
+    --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
+  }
+
+  /* Base styling */
+  body {
+    font-family: "Inter", "Roboto", sans-serif;
+    background: var(--bg-gradient);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  /* Navbar */
+  .nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: rgba(11, 26, 58, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon-cyan);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+    box-shadow: 0 0 25px rgba(0, 224, 255, 0.25);
+    z-index: 40;
+    backdrop-filter: blur(8px);
+  }
+
+  main {
+    padding: 100px 50px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Page title */
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--neon-cyan);
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(0, 224, 255, 0.5);
+    padding-bottom: 10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+
+  /* Each statement line */
+  .statement-line {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 20px 25px;
+    margin-bottom: 18px;
+    font-size: 1.05em;
+    line-height: 1.5;
+    border-left: 4px solid var(--neon-pink);
+    box-shadow: 0 0 15px rgba(255, 0, 247, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: slideUp 0.4s ease;
+  }
+
+  .statement-line:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px var(--neon-pink);
+    border-left-color: var(--neon-cyan);
+  }
+
+  /* Timestamp */
+  .timestamp {
+    display: block;
+    font-size: 0.85em;
+    color: #b4c7d9;
+    margin-top: 8px;
+    text-align: right;
+    font-style: italic;
+  }
+
+  /* Subtle animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    main { padding: 100px 20px; }
+    .statement-line { font-size: 0.95em; padding: 15px 18px; }
+    h1 { font-size: 1.6rem; }
+  }
+</style>
+
+</head>
+<body>
+  <div class="nav-bar">GRC Statements</div>
+
+  <main>
+    <h1>Your Saved Statements</h1>
+
+    {% if statements %}
+      {% for st in statements %}
+        <div class="statement-line">
+          {{ st.content|striptags }}
+          <span class="timestamp">— {{ st.timestamp.strftime("%Y-%m-%d %H:%M") }}</span>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; font-size:1.1em; color:#c9d6e5;">No saved statements yet.</p>
+    {% endif %}
+  </main>
+</body>
+</html>

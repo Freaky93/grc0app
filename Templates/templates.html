@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Your Templates</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+:root {
+  --neon-cyan: #00e0ff;
+  --neon-pink: #ff00f7;
+  --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
+}
+
+/* Base styling */
+body {
+  font-family: "Inter", "Roboto", sans-serif;
+  background: var(--bg-gradient);
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Navbar */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(11, 26, 58, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neon-cyan);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  box-shadow: 0 0 25px rgba(0, 224, 255, 0.25);
+  z-index: 40;
+  backdrop-filter: blur(8px);
+}
+
+/* Main section */
+main {
+  padding: 100px 50px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Headings */
+h1, h2 {
+  text-align: center;
+  color: var(--neon-cyan);
+  margin-bottom: 25px;
+}
+
+h1 {
+  border-bottom: 2px solid rgba(0, 224, 255, 0.4);
+  padding-bottom: 8px;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-top: 40px;
+}
+
+/* Template items */
+.template-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--neon-pink);
+  border-radius: 10px;
+  padding: 20px 25px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 15px rgba(255, 0, 247, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: slideUp 0.4s ease;
+}
+
+.template-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px var(--neon-pink);
+  border-left-color: var(--neon-cyan);
+}
+
+/* Input fields */
+input, textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eefc;
+  font-size: 1em;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 10px rgba(0, 224, 255, 0.15);
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  box-shadow: 0 0 20px var(--neon-cyan);
+  transform: scale(1.01);
+}
+
+/* Buttons */
+.btn {
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 5px;
+  box-shadow: 0 0 15px rgba(0, 224, 255, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px var(--neon-cyan);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  main { padding: 100px 20px; }
+  .template-item { font-size: 0.95em; padding: 15px 18px; }
+  h1 { font-size: 1.6rem; }
+}
+
+</style>
+
+</head>
+<body>
+  <div class="nav-bar">Template Manager</div>
+
+  <main>
+    <h1>Your Templates</h1>
+
+    {% if templates %}
+      {% for t in templates %}
+        <div class="template-item">
+          <strong>{{ t.name }}</strong>
+          <div>{{ t.content|safe }}</div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No templates yet.</p>
+    {% endif %}
+
+    <h2>Add New Template</h2>
+<input id="tplName" type="text" placeholder="Template name" required><br><br>
+<textarea id="tplContent" rows="4" cols="50" placeholder="Template content (use [EMPTY] where you want boxes)" required></textarea><br>
+<button id="saveBtn" class="btn" type="button">Save Template</button>
+
+<script>
+document.getElementById('saveBtn').addEventListener('click', async () => {
+  const name = document.getElementById('tplName').value.trim();
+  const content = document.getElementById('tplContent').value.trim();
+  if (!name || !content) {
+    alert('Please enter both name and content.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/add_template', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ name, content })
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      // Send the new template info back to dashboard
+      if (window.opener && !window.opener.closed) {
+        window.opener.postMessage({ type: 'new_template', template: data }, '*');
+      }
+
+      // Small success feedback
+      document.getElementById('saveBtn').textContent = 'Saved ✓';
+      setTimeout(() => window.close(), 700);
+    } else {
+      alert('Error: ' + (data.error || 'Failed to save.'));
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Server error while saving template.');
+  }
+});
+</script>
+
+</body>
+</html>
