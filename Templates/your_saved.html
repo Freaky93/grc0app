@@ -4,18 +4,21 @@
   <meta charset="utf-8">
   <title>Your Saved Statements</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
+<style>
   :root {
-    --neon-cyan: #00e0ff;
-    --neon-pink: #ff00f7;
-    --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
+    --primary: #1c0634;      /* Deep Navy Blue */
+    --secondary: #3b004d;    /* Bright Blue */
+    --accent: #60A5FA;       /* Soft Sky Blue */    
+    --bg-color: #F8FAFC;     /* Off White */
+    --text-color: #120027;   /* Dark Gray */
+    --card-bg: #f0e3ff;      /* White */
   }
 
   /* Base styling */
   body {
     font-family: "Inter", "Roboto", sans-serif;
-    background: var(--bg-gradient);
-    color: #ffffff;
+    background: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     animation: fadeIn 0.6s ease-in-out;
@@ -28,18 +31,16 @@
     left: 0;
     right: 0;
     height: 70px;
-    background: rgba(11, 26, 58, 0.9);
+    background: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--neon-cyan);
+    color: #ffffff;
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 1px;
-    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-    box-shadow: 0 0 25px rgba(0, 224, 255, 0.25);
+    box-shadow: 0 2px 10px rgba(30, 58, 138, 0.25);
     z-index: 40;
-    backdrop-filter: blur(8px);
   }
 
   main {
@@ -52,50 +53,49 @@
   h1 {
     text-align: center;
     margin-bottom: 40px;
-    color: var(--neon-cyan);
-    font-size: 2rem;
+    color: var(--primary);
+    font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 2px solid rgba(0, 224, 255, 0.5);
+    border-bottom: 3px solid var(--secondary);
     padding-bottom: 10px;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    
   }
 
   /* Each statement line */
   .statement-line {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--card-bg);
     border-radius: 10px;
     padding: 20px 25px;
     margin-bottom: 18px;
     font-size: 1.05em;
     line-height: 1.5;
-    border-left: 4px solid var(--neon-pink);
-    box-shadow: 0 0 15px rgba(255, 0, 247, 0.25);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    /* border-left: 4px solid var(--secondary); */
+    box-shadow: 0 2px 10px rgba(30, 64, 175, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     animation: slideUp 0.4s ease;
   }
 
   .statement-line:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 25px var(--neon-pink);
-    border-left-color: var(--neon-cyan);
+    /* box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25); */
+    border-left: 4px solid #ae00ff;
   }
 
   /* Timestamp */
   .timestamp {
     display: block;
     font-size: 0.85em;
-    color: #b4c7d9;
+    color: #6B7280;
     margin-top: 8px;
     text-align: right;
     font-style: italic;
   }
 
-  /* Subtle animations */
+  /* Animations */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -114,6 +114,7 @@
   }
 </style>
 
+
 </head>
 <body>
   <div class="nav-bar">GRC Statements</div>
@@ -129,7 +130,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <p style="text-align:center; font-size:1.1em; color:#c9d6e5;">No saved statements yet.</p>
+      <p style="text-align:center; font-size:1.1em; color:#3d3e3f;">No saved statements yet.</p>
     {% endif %}
   </main>
 </body>

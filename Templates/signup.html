@@ -5,14 +5,12 @@
   <title>Signup - GRC Statements</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  :root {
-  --bg-dark: #0a0f1f;
-  --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
-  --accent-neon: #00e0ff; /* cyan glow */
-  --accent-neon2: #f35eee; /* purple glow */
-  --text-light: #eaf6ff;
-  --card-bg: rgba(16, 24, 48, 0.9);
-  --border-glow: 0 0 10px var(--accent-neon);
+:root {
+  --bg-gradient: white; 
+  --deep-purple: #1c0634;
+  --accent-purple: #ae00ff;
+  --light-bg: #f0e3ff;
+  --text-main: #120027;
 }
 
 /* ---------------- Body ---------------- */
@@ -24,7 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--text-light);
+  color: var(--text-main);
   overflow-x: hidden;
 }
 
@@ -32,8 +30,8 @@ body {
 .navbar {
   width: 100%;
   height: 60px;
-  background: rgba(25, 38, 70, 0.85);
-  color: var(--text-light);
+  background: rgba(28, 6, 52, 0.95);
+  color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,46 +40,46 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  box-shadow: 0 0 20px rgba(0, 224, 255, 0.3);
+  box-shadow: 0 0 25px rgba(174, 0, 255, 0.3);
   z-index: 10;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 
 .navbar .brand {
   font-weight: 700;
   font-size: 22px;
   letter-spacing: 0.5px;
-  color: var(--accent-neon);
-  text-shadow: 0 0 10px var(--accent-neon2);
+  color: white;
+  text-shadow: 0 0 10px rgba(174, 0, 255, 0.5);
 }
 
 .navbar a.login-btn {
-  background: var(--accent-neon2);
-  color: #000000;
+  background: var(--accent-purple);
+  color: #fff;
   padding: 8px 16px;
   border-radius: 8px;
   text-decoration: none;
   transition: all 0.3s ease;
   font-weight: 500;
-  box-shadow: 0 0 10px var(--accent-neon2);
+  box-shadow: 0 0 10px rgba(174, 0, 255, 0.3);
 }
 
 .navbar a.login-btn:hover {
-  background: var(--accent-neon);
-  box-shadow: 0 0 20px var(--accent-neon);
+  background: #7b00cc;
+  box-shadow: 0 0 20px rgba(174, 0, 255, 0.5);
 }
 
 /* ---------------- Card ---------------- */
 .card {
   width: 380px;
-  background: var(--card-bg);
-  color: var(--text-light);
+  background: var(--light-bg);
+  color: var(--text-main);
   border-radius: 12px;
-  box-shadow: 0 0 25px rgba(0, 224, 255, 0.15);
+  box-shadow: 0 0 25px rgba(174, 0, 255, 0.2);
   padding: 28px;
   margin-top: 120px; /* Push below navbar */
   animation: fadeInCard 0.6s ease-out;
-  border: 1px solid rgba(0, 224, 255, 0.2);
+  border: 1px solid rgba(174, 0, 255, 0.3);
 }
 
 /* ---------------- Headings ---------------- */
@@ -90,12 +88,12 @@ h2 {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  color: var(--accent-neon);
-  text-shadow: 0 0 10px var(--accent-neon2), 0 0 20px var(--accent-neon);
+  color: var(--deep-purple);
+  /* text-shadow: 0 0 10px rgba(174, 0, 255, 0.4); */
 }
 
 .small {
-  color: #9bb0c9;
+  color: #4b006f;
   font-size: 0.95em;
   text-align: center;
   margin-bottom: 16px;
@@ -106,27 +104,27 @@ label {
   display: block;
   font-weight: 600;
   margin-top: 10px;
-  color: #cfe3ff;
+  color: #3a005a;
 }
 
 input {
   width: 100%;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid var(--accent-neon);
+  border: 1px solid rgba(174, 0, 255, 0.6);
   margin-top: 6px;
-  background: #0f1b33;
-  color: var(--text-light);
+  background: #fff;
+  color: var(--text-main);
   box-sizing: border-box;
-  box-shadow: 0 0 10px rgba(0, 224, 255, 0.3);
+  box-shadow: 0 0 10px rgba(174, 0, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 input:focus {
   outline: none;
-  border-color: var(--accent-neon2);
-  box-shadow: 0 0 20px var(--accent-neon2);
-  background: rgba(15, 30, 60, 0.95);
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 20px rgba(174, 0, 255, 0.3);
+  background: #f8eaff;
 }
 
 /* ---------------- Buttons ---------------- */
@@ -134,46 +132,47 @@ input:focus {
   margin-top: 18px;
   width: 100%;
   padding: 12px;
-  background: var(--accent-neon2);
-  color: #000000;
+  background: linear-gradient(90deg, var(--deep-purple), var(--accent-purple));
+  color: #ffffff;
   border: none;
   border-radius: 10px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 0 15px var(--accent-neon2);
+  box-shadow: 0 0 15px rgba(174, 0, 255, 0.25);
 }
 
 .btn:hover {
-  background: var(--accent-neon);
-  box-shadow: 0 0 25px var(--accent-neon);
+  background: linear-gradient(90deg, var(--accent-purple), #d266ff);
+  box-shadow: 0 0 25px rgba(174, 0, 255, 0.5);
   transform: translateY(-2px);
 }
 
 /* ---------------- Text Links ---------------- */
 .muted {
-  color: #9bb0c9;
+  color: #4b006f;
   margin-top: 16px;
   text-align: center;
   font-size: 0.95em;
 }
 
 a {
-  color: var(--accent-neon);
+  color: var(--accent-purple);
   text-decoration: none;
   font-weight: 600;
   transition: 0.2s ease;
 }
 
 a:hover {
-  text-shadow: 0 0 10px var(--accent-neon2);
+  text-shadow: 0 0 10px rgba(174, 0, 255, 0.5);
 }
 
 /* ---------------- Errors ---------------- */
 .error {
-  color: #ff6b6b;
+  color: #e02e2e;
   margin-top: 10px;
   text-align: center;
+  font-weight: 500;
 }
 
 /* ---------------- Animations ---------------- */
@@ -181,7 +180,8 @@ a:hover {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-  </style>  
+</style>
+
 </head>
 <body>
 
@@ -217,8 +217,7 @@ a:hover {
     {% endif %}
 
     <div class="muted">
-      Already have an account? <a href="{{ url_for('login
-      ') }}">Login</a>
+      Already have an account? <a href="{{ url_for('login') }}">Login</a>
     </div>
   </div>
 

@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <title>Your Templates</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
+<style>
 :root {
-  --neon-cyan: #00e0ff;
-  --neon-pink: #ff00f7;
-  --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
+  --deep-purple: #1c0634;
+  --accent-purple: #ae00ff;
+  --soft-bg: linear-gradient(135deg, #f8f5ff, #efe7ff);
 }
 
 /* Base styling */
 body {
   font-family: "Inter", "Roboto", sans-serif;
-  background: var(--bg-gradient);
-  color: #ffffff;
+  background: var(--soft-bg);
+  color: #120027;
   margin: 0;
   padding: 0;
   animation: fadeIn 0.6s ease-in-out;
@@ -28,18 +28,17 @@ body {
   left: 0;
   right: 0;
   height: 70px;
-  background: rgba(11, 26, 58, 0.9);
+  background: var(--deep-purple);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--neon-cyan);
+  color: #ffffff;
   font-size: 1.8rem;
   font-weight: 700;
   letter-spacing: 1px;
-  text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-  box-shadow: 0 0 25px rgba(0, 224, 255, 0.25);
+  box-shadow: 0 4px 20px rgba(28, 6, 52, 0.4);
   z-index: 40;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
 }
 
 /* Main section */
@@ -52,77 +51,78 @@ main {
 /* Headings */
 h1, h2 {
   text-align: center;
-  color: var(--neon-cyan);
+  color: var(--deep-purple);
   margin-bottom: 25px;
 }
 
 h1 {
-  border-bottom: 2px solid rgba(0, 224, 255, 0.4);
+  border-bottom: 2px solid rgba(37, 2, 53, 0.4);
   padding-bottom: 8px;
-  font-size: 2rem;
+  font-size: 1.3rem;
   text-transform: uppercase;
 }
 
 h2 {
   font-size: 1.4rem;
   margin-top: 40px;
+  color: #29004d;
 }
 
 /* Template items */
 .template-item {
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 4px solid var(--neon-pink);
+  background: #d1b7ee;
+  border-left: 4px solid var(--accent-purple);
   border-radius: 10px;
   padding: 20px 25px;
   margin-bottom: 16px;
-  box-shadow: 0 0 15px rgba(255, 0, 247, 0.25);
+  box-shadow: 0 0 15px rgba(174, 0, 255, 0.25);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   animation: slideUp 0.4s ease;
 }
 
 .template-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 25px var(--neon-pink);
-  border-left-color: var(--neon-cyan);
+  box-shadow: 0 0 25px rgba(174, 0, 255, 0.4);
+  border-left-color: var(--deep-purple);
 }
 
 /* Input fields */
 input, textarea {
   width: 100%;
-  border: none;
+  border: 1px solid rgba(28, 6, 52, 0.3);
   outline: none;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #e6eefc;
+  background: #e7d7ff;
+  color: #120027;
   font-size: 1em;
   padding: 12px 14px;
   margin-bottom: 16px;
-  box-shadow: 0 0 10px rgba(0, 224, 255, 0.15);
+  box-shadow: 0 0 8px rgba(174, 0, 255, 0.1);
   transition: box-shadow 0.25s ease, transform 0.2s ease;
 }
 
 input:focus, textarea:focus {
-  box-shadow: 0 0 20px var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(174, 0, 255, 0.3);
   transform: scale(1.01);
 }
 
 /* Buttons */
 .btn {
-  background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
-  color: #000000;
+  background: linear-gradient(90deg, var(--deep-purple), var(--accent-purple));
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 12px 22px;
   font-weight: 600;
   cursor: pointer;
   margin-top: 5px;
-  box-shadow: 0 0 15px rgba(0, 224, 255, 0.25);
+  box-shadow: 0 0 15px rgba(174, 0, 255, 0.25);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 25px var(--neon-cyan);
+  box-shadow: 0 0 25px rgba(174, 0, 255, 0.5);
 }
 
 /* Animations */
@@ -142,10 +142,8 @@ input:focus, textarea:focus {
   .template-item { font-size: 0.95em; padding: 15px 18px; }
   h1 { font-size: 1.6rem; }
 }
-
-
-
 </style>
+
 
 </head>
 <body>
@@ -168,7 +166,7 @@ input:focus, textarea:focus {
     <h2>Add New Template</h2>
 <input id="tplName" type="text" placeholder="Template name" required><br><br>
 <textarea id="tplContent" rows="4" cols="50" placeholder="Template content (use [EMPTY] where you want boxes)" required></textarea><br>
-<p style="border-bottom: 2px solid #90caf9; padding-bottom: 5px; width: 100%;">
+<p style="border-bottom: 2px solid #260433; padding-bottom: 5px; width: 100%;">
   Template content (use [EMPTY] where you want boxes)
 </p>
 <button id="saveBtn" class="btn" type="button">Save Template</button>

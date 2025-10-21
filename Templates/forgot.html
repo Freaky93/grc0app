@@ -5,97 +5,105 @@
   <title>Forgot Password - GRC Statements</title>
  <style>
   :root {
-    --neon-cyan: #00e0ff;
-    --neon-pink: #ff00f7;
-    --bg-dark: #0a0f1f;
-    --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
-    --text-light: #eaf6ff;
+    --accent-purple: #ae00ff;
+    --deep-purple: #1c0634;
+    --soft-bg: linear-gradient(135deg, #f8f5ff, #efe7ff);
+    --card-bg: #f0e3ff;
+    --text-dark: #120027;
   }
 
   body {
     font-family: "Inter", sans-serif;
-    background: var(--bg-gradient);
+    background: var(--soft-bg);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    color: var(--text-light);
+    color: var(--text-dark);
     animation: fadeIn 0.6s ease-in-out;
   }
 
+  /* ---------------- Card ---------------- */
   .card {
     width: 380px;
-    background: rgba(16, 24, 48, 0.9);
+    background: var(--card-bg);
     border-radius: 14px;
     padding: 32px;
-    box-shadow: 0 0 25px rgba(255, 0, 247, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 25px rgba(174, 0, 255, 0.15);
+    border: 1px solid rgba(174, 0, 255, 0.25);
     backdrop-filter: blur(10px);
     text-align: center;
     animation: slideIn 0.5s ease-out;
   }
 
+  /* ---------------- Heading ---------------- */
   h2 {
     margin: 0 0 16px;
-    color: var(--neon-cyan);
-    text-shadow: 0 0 10px var(--neon-cyan), 0 0 25px var(--neon-cyan);
+    color: var(--deep-purple);
+    text-shadow: 0 0 10px rgba(174, 0, 255, 0.3);
     font-weight: 700;
     font-size: 1.6rem;
   }
 
+  /* ---------------- Inputs ---------------- */
   input {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid #30363d;
+    border: 1px solid rgba(174, 0, 255, 0.3);
     margin-top: 10px;
-    background: #0f1525;
-    color: #fff;
+    background: #ffffff;
+    color: var(--text-dark);
     font-size: 1em;
     transition: 0.3s ease;
-    box-shadow: 0 0 8px rgba(255, 0, 247, 0.1);
+    box-shadow: 0 0 8px rgba(174, 0, 255, 0.1);
   }
 
   input:focus {
     outline: none;
-    border-color: var(--neon-pink);
-    box-shadow: 0 0 12px var(--neon-pink);
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 12px rgba(174, 0, 255, 0.4);
+    background: #f8eaff;
   }
 
+  /* ---------------- Button ---------------- */
   .btn {
     margin-top: 18px;
     width: 100%;
     padding: 12px;
-    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    background: linear-gradient(90deg, var(--deep-purple), var(--accent-purple));
     color: #fff;
     border: none;
     border-radius: 10px;
     font-weight: 700;
     cursor: pointer;
     transition: 0.25s ease;
-    box-shadow: 0 0 15px rgba(255, 0, 247, 0.2);
+    box-shadow: 0 0 15px rgba(174, 0, 255, 0.2);
   }
 
   .btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 25px var(--neon-pink);
+    box-shadow: 0 0 25px rgba(174, 0, 255, 0.5);
+    background: linear-gradient(90deg, var(--accent-purple), #d266ff);
   }
 
+  /* ---------------- Messages ---------------- */
   .msg {
     margin-top: 12px;
-    color: #7fffd4;
-    text-shadow: 0 0 8px var(--neon-cyan);
+    color: var(--accent-purple);
+    text-shadow: 0 0 8px rgba(174, 0, 255, 0.3);
   }
 
   .error {
     margin-top: 12px;
-    color: #ff6b6b;
-    text-shadow: 0 0 6px rgba(255, 107, 107, 0.6);
+    color: #e02e2e;
+    text-shadow: 0 0 6px rgba(224, 46, 46, 0.6);
   }
 
+  /* ---------------- Links ---------------- */
   a {
-    color: var(--neon-cyan);
+    color: var(--accent-purple);
     text-decoration: none;
     font-weight: 600;
     display: block;
@@ -104,10 +112,11 @@
   }
 
   a:hover {
-    color: var(--neon-pink);
-    text-shadow: 0 0 10px var(--neon-pink);
+    color: #7b00cc;
+    text-shadow: 0 0 10px rgba(174, 0, 255, 0.4);
   }
 
+  /* ---------------- Animations ---------------- */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -118,6 +127,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 </style>
+
 
 </head>
 <body>

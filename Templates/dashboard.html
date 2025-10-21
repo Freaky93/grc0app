@@ -7,468 +7,452 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* --- Dark Neon Themed Dashboard --- */
-    :root {
-      --bg1: #0f1724;
-      --panel: #23263a;
-      --muted: #a3a7c2;
-      --accent: #00e0ff;
-      /* cyan glow */
-      --accent2: #2AF598;
-      --editor-glow: #f74ef1;
-      /* pink/purple glow */
+  /* --- Dashboard (Updated to Saved Page Color Theme) --- */
+  :root {
+    --primary: #31085c;      /* Deep Purple / Navbar */
+    --secondary: #3b004d;    /* Accent Purple */
+    --accent: #ae00ff;       /* Hover Border / Button Highlight */
+    --bg-color: #F8FAFC;     /* Light Background */
+    --text-color: #120027;   /* Dark Text */
+    --card-bg: #f0e3ff;      /* Light Purple Box */
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Inter", "Roboto", sans-serif;
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    animation: fadeInBody 0.6s ease-in-out;
+  }
+
+  /* --- Navbar --- */
+  .nav-bar {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(28, 6, 52, 0.95);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .nav-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #ffffff;
+  }
+
+  .nav-profile {
+    position: absolute;
+    right: 28px;
+  }
+
+  .profile-icon {
+    background: var(--card-bg);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(28, 6, 52, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .profile-icon:hover {
+    box-shadow: 0 0 16px rgba(28, 6, 52, 0.6);
+    transform: scale(1.05);
+  }
+
+  .container {
+    display: flex;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+    align-items: stretch;
+  }
+
+  /* --- Left Saved Panel --- */
+  .sidebar {
+    width: 240px;
+    background: var(--card-bg);
+    padding: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: slideInSidebar 0.5s ease-out;
+  }
+
+  .panel-title {
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .statements-list {
+    overflow: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 6px;
+  }
+
+  .saved-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 12px;
+    position: relative;
+    color: var(--text-color);
+    box-shadow: 0 0 10px rgba(18, 0, 39, 0.1);
+    transition: all 0.25s ease;
+  }
+
+  .saved-item:hover {
+    box-shadow: 0 0 14px rgba(174, 0, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .saved-item .title {
+    font-weight: 700;
+    color: var(--text-color);
+  }
+
+  .delete-saved-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #ffffff;
+    color: var(--primary);
+    border: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .delete-saved-btn:hover {
+    box-shadow: 0 0 6px var(--accent);
+    transform: scale(1.1);
+  }
+
+  /* --- Center Editor --- */
+  .editor-area {
+    flex: 1;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: auto;
+  }
+
+  .template-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .dropdown-content {
+    width: 300px;
+  }
+
+  .template-select {
+    padding: 8px 12px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    color: var(--text-color);
+    border: 2px solid #ccc;
+    width: 300px;
+    position: relative;
+  }
+
+  .template-controls .template-select option {
+    padding: 8px 12px;
+    width: 400px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .editor-box {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid #d3c7e6;
+    border-radius: 10px;
+    padding: 18px;
+    min-height: 260px;
+    overflow: auto;
+    color: var(--text-color);
+    box-shadow: 0 0 15px rgba(174, 0, 255, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .editor-box:focus-within {
+    box-shadow: 0 0 25px rgba(174, 0, 255, 0.4);
+    transform: scale(1.01);
+  }
+
+  .editor-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .save-btn,
+  .delete-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .save-btn {
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 0 12px rgba(28, 6, 52, 0.3);
+  }
+
+  .save-btn:hover {
+    box-shadow: 0 0 20px rgba(174, 0, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .delete-btn {
+    background:#eac0f7;
+    color: #000000;
+    box-shadow: 0 0 8px rgba(13, 1, 19, 0.3);
+  }
+
+  /* --- Right Components Panel --- */
+  .components-panel {
+    width: 300px;
+    background: var(--card-bg);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .components-list {
+    overflow: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 6px;
+  }
+
+  .component {
+    background: var(--card-bg);
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: grab;
+    border: 1px solid #d3c7e6;
+    transition: all 0.25s ease;
+  }
+
+  .component:hover {
+    box-shadow: 0 0 10px rgba(174, 0, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  #component-search {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #d3c7e6;
+    background: var(--card-bg);
+    color: var(--text-color);
+    box-shadow: 0 0 10px rgba(174, 0, 255, 0.2);
+  }
+
+  /* --- Modal & Confirm --- */
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 12px;
+    width: 420px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    color: var(--text-color);
+    transform: translateY(-8px);
+    animation: pop .22s ease;
+    position: relative;
+  }
+
+  .modal h3 {
+    color: var(--primary);
+    margin: 0 0 12px;
+    text-align: center;
+  }
+
+  .modal input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #d3c7e6;
+    background: var(--card-bg);
+    color: var(--text-color);
+  }
+
+  .modal .actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .close-x {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .confirm-card {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 14px;
+    padding: 22px;
+    min-width: 320px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  .confirm-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .resizer {
+    width: 6px;
+    background: transparent;
+    cursor: ew-resize;
+    user-select: none;
+  }
+
+  .resizer:hover {
+    background: rgba(18, 0, 39, 0.1);
+  }
+
+  @keyframes fadeInBody {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
     }
-
-    * {
-      box-sizing: border-box;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
 
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, Roboto;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #17243a, #0b1634);
-      color: #e6eefc;
-      animation: fadeInBody 0.6s ease-in-out;
+  @keyframes slideInSidebar {
+    from {
+      transform: translateX(-30px);
+      opacity: 0;
     }
-
-    /* --- Navbar --- */
-    .nav-bar {
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #0b1a3a;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-      position: sticky;
-      top: 0;
-      z-index: 50;
+    to {
+      transform: translateX(0);
+      opacity: 1;
     }
+  }
 
-    .nav-title {
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: var(--accent);
-      text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(4px)
     }
-
-    .nav-profile {
-      position: absolute;
-      right: 28px;
+    to {
+      opacity: 1;
+      transform: translateY(0)
     }
+  }
 
-    .profile-icon {
-      background: var(--panel);
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      color: var(--accent);
-      cursor: pointer;
-      box-shadow: 0 0 8px var(--accent);
-      transition: all 0.3s ease;
-    }
+  button,
+  .btn {
+    transition: all 0.25s ease;
+  }
 
-    .profile-icon:hover {
-      box-shadow: 0 0 16px var(--accent);
-      transform: scale(1.05);
-    }
+  button:hover,
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px var(--accent);
+  }
 
-    .container {
-      display: flex;
-      height: calc(100vh - 70px);
-      overflow: hidden;
-      align-items: stretch;
-    }
+  .component {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
 
-    /* --- Left Saved Panel --- */
-    .sidebar {
-      width: 240px;
-      background: var(--panel);
-      padding: 18px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      animation: slideInSidebar 0.5s ease-out;
-    }
+  .comp-name {
+    flex: 1;
+    padding-right: 8px;
+  }
 
-    .panel-title {
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 6px;
-      text-shadow: 0 0 10px var(--accent);
-    }
+  .delete-component-btn {
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    font-weight: 700;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .12s ease, background .12s ease;
+  }
 
-    .statements-list {
-      overflow: auto;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding-right: 6px;
-    }
+  .delete-component-btn:hover {
+    transform: scale(1.05);
+    background: rgba(174, 0, 255, 0.08);
+    box-shadow: 0 0 8px rgba(174, 0, 255, 0.2);
+  }
+</style>
 
-    .saved-item {
-      background: #181a20;
-      border-radius: 8px;
-      padding: 12px;
-      position: relative;
-      color: #e6eefc;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
-      transition: all 0.25s ease;
-    }
-
-    .saved-item:hover {
-      box-shadow: 0 0 14px rgba(0, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
-
-    .saved-item .title {
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .delete-saved-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: #222;
-      color: var(--accent);
-      border: none;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .delete-saved-btn:hover {
-      box-shadow: 0 0 6px var(--accent);
-      transform: scale(1.1);
-    }
-
-    /* --- Center Editor --- */
-    .editor-area {
-      flex: 1;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      overflow: auto;
-    }
-
-    .template-controls {
-      display: block;
-      gap: 12px;
-      align-items: center;
-    }
-
-
-
-    .dropdown-content {
-      width: 300px;
-    }
-
-
-    .template-select {
-      padding: 8px 12px;
-      background: var(--panel);
-      border-radius: 8px;
-      color: #c0c3f0;
-      border: 2px solid #2c2f3a;
-      width: 300px;
-      position: relative;
-    }
-
-    .template-controls .template-select option {
-      padding: 8px 12px;
-      width: 400px;
-      max-width: 400px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;;
-    }
-
-    .editor-box {
-      flex: 1;
-      background: transparent;
-      border: 1px solid #2c2f3a;
-      border-radius: 10px;
-      padding: 18px;
-      min-height: 260px;
-      overflow: auto;
-      color: #e6eefc;
-      box-shadow: 0 0 15px var(--editor-glow);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-    .editor-box:focus-within {
-      box-shadow: 0 0 25px var(--editor-glow), 0 0 40px rgba(255, 0, 247, 0.4);
-      transform: scale(1.01);
-    }
-
-    .editor-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .save-btn,
-    .delete-btn {
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .save-btn {
-      background: linear-gradient(90deg, #00e0ff, #009EFD);
-      color: #05102a;
-      font-weight: 700;
-      box-shadow: 0 0 12px rgba(0, 224, 255, 0.4);
-    }
-
-    .save-btn:hover {
-      box-shadow: 0 0 20px rgba(0, 224, 255, 0.8);
-      transform: translateY(-2px);
-    }
-
-    .delete-btn {
-      background: #2b2f3a;
-      color: #e6eefc;
-      box-shadow: 0 0 8px rgba(0, 224, 255, 0.3);
-    }
-
-    /* --- Right Components Panel --- */
-    .components-panel {
-      width: 300px;
-      background: var(--panel);
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      overflow: hidden;
-    }
-
-    .components-list {
-      overflow: auto;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding-right: 6px;
-    }
-
-    .component {
-      background: #181a20;
-      padding: 10px 12px;
-      border-radius: 8px;
-      cursor: grab;
-      border: 1px solid #2c2f3a;
-      transition: all 0.25s ease;
-    }
-
-    .component:hover {
-      box-shadow: 0 0 10px var(--accent);
-      transform: translateY(-2px);
-    }
-
-    #component-search {
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid #2c2f3a;
-      background: #181a20;
-      color: #e6eefc;
-      box-shadow: 0 0 10px var(--accent);
-    }
-
-    /* --- Modal & Confirm --- */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.55);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal {
-      background: var(--panel);
-      padding: 24px;
-      border-radius: 12px;
-      width: 420px;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
-      color: #e6eefc;
-      transform: translateY(-8px);
-      animation: pop .22s ease;
-      position: relative;
-    }
-
-    .modal h3 {
-      color: var(--accent);
-      margin: 0 0 12px;
-      text-align: center;
-      text-shadow: 0 0 8px var(--accent);
-    }
-
-    .modal input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #2c2f3a;
-      background: #181a20;
-      color: #e6eefc;
-    }
-
-    .modal .actions {
-      margin-top: 12px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .close-x {
-      position: absolute;
-      right: 12px;
-      top: 12px;
-      background: none;
-      border: none;
-      color: var(--accent);
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .confirm-card {
-      display: none;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1001;
-      background: #23263a;
-      color: #8d8b8b;
-      border-radius: 14px;
-      padding: 22px;
-      min-width: 320px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-    }
-
-    .confirm-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.45);
-    }
-
-    .resizer {
-      width: 6px;
-      background: transparent;
-      cursor: ew-resize;
-      user-select: none;
-    }
-
-    .resizer:hover {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    @keyframes fadeInBody {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideInSidebar {
-      from {
-        transform: translateX(-30px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes pop {
-      from {
-        opacity: 0;
-        transform: translateY(4px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    button,
-    .btn {
-      transition: all 0.25s ease;
-    }
-
-    button:hover,
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 12px var(--accent);
-    }
-
-    .component {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .comp-name {
-      flex: 1;
-      padding-right: 8px;
-    }
-
-    /* delete small cross for user components */
-    .delete-component-btn {
-      background: transparent;
-      border: none;
-      color: #ffb0d6;
-      /* light pink so it stands out a bit */
-      font-weight: 700;
-      cursor: pointer;
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform .12s ease, background .12s ease;
-    }
-
-    .delete-component-btn:hover {
-      transform: scale(1.05);
-      background: rgba(255, 176, 214, 0.06);
-      box-shadow: 0 0 8px rgba(255, 176, 214, 0.12);
-    }
-
-    /* .option001 {
-  overflow: wrap;
-} */
-  </style>
 </head>
 
 <body>
@@ -546,7 +530,7 @@
         <script>
           // helper: convert content string with [EMPTY] -> inline editable span like your existing code
           function formatTemplateContent(contentStr) {
-            return contentStr.replace(/\[EMPTY\]/g, "<span contenteditable='true' class='tfield' style='display:inline-block; min-width:70px; line-height:2em; height:2em; padding:2px 2px; background:#0b1320; border-radius:3px; margin:0 6px; border:1px solid #2c3a5a; vertical-align:middle; overflow:hidden;'></span>");
+            return contentStr.replace(/\[EMPTY\]/g, "<span contenteditable='true' class='tfield' style='display:inline-block; min-width:70px; line-height:2em; height:2em; padding:2px 2px; background:#ffffff; border-radius:3px; margin:0 6px; border:1px solid #2c3a5a; vertical-align:middle; overflow:hidden;'></span>");
           }
 
           // handle selection of templates (existing mapping used previously)
@@ -600,11 +584,11 @@
           const tplDeleteOverlay = document.createElement('div');
           tplDeleteOverlay.style.cssText = "display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.55); align-items:center; justify-content:center; z-index:1500;";
           tplDeleteOverlay.innerHTML = `
-    <div style="background:#23263a; color:#e6eefc; padding:20px; width:360px; border-radius:10px; text-align:center;">
-      <h3 style="color:#90caf9;margin:0 0 10px">Delete Template?</h3>
-      <p style="color:#a3a7c2;">This will permanently delete the template you created.</p>
+    <div style="background:#ecd0f3;; color:#27022c; padding:20px; width:360px; border-radius:10px; text-align:center;">
+      <h3 style="color:black;margin:0 0 10px">Delete Template?</h3>
+      <p style="color:black;">This will permanently delete the template you created.</p>
       <div style="display:flex; gap:12px; justify-content:center; margin-top:14px;">
-        <button id="confirmDeleteTpl" style="padding:9px 14px;border-radius:8px;border:none;background:linear-gradient(90deg,#2AF598,#009EFD);color:#05102a; font-weight:700; cursor:pointer">Delete</button>
+        <button id="confirmDeleteTpl" style="padding:9px 14px;border-radius:8px;border:none;background:rgba(28, 6, 52, 0.95); color:white; font-weight:700; cursor:pointer">Delete</button>
         <button id="cancelDeleteTpl" style="padding:9px 14px;border-radius:8px;border:none;background:#2b2f3a;color:#e6eefc;font-weight:700; cursor:pointer">Cancel</button>
       </div>
     </div>`;
@@ -650,7 +634,7 @@
 
       <div class="editor-actions">
         <button class="save-btn" id="saveStatement">Save</button>
-        <button class="delete-btn" id="deleteStatement">Clear</button>
+        <!-- <button class="delete-btn" id="deleteStatement">Clear</button> -->
       </div>
     </main>
 
@@ -681,7 +665,7 @@
         {% endfor %}
 
         <!-- ✅ Added Core Governance + Legal + Organizational + Documentation + Risk + Quality Sections -->
-        <div style="font-weight:bold; color:#afd4f3; margin-top:16px;">Core Governance Terms</div>
+        <div style="font-weight:bold; color:#250325; margin-top:16px;">Core Governance Terms</div>
         <div class="component" draggable="true">Policy</div>
         <div class="component" draggable="true">Standard</div>
         <div class="component" draggable="true">Procedure</div>
@@ -696,7 +680,7 @@
         <div class="component" draggable="true">Responsibility</div>
         <div class="component" draggable="true">Ownership</div>
 
-        <div style="font-weight:bold; color:#afd2ee; margin-top:16px;">Legal & Regulatory Language</div>
+        <div style="font-weight:bold; color:#250325; margin-top:16px;">Legal & Regulatory Language</div>
         <div class="component" draggable="true">Legal</div>
         <div class="component" draggable="true">Regulatory</div>
         <div class="component" draggable="true">Statutory</div>
@@ -712,7 +696,7 @@
         <div class="component" draggable="true">Disclosure</div>
         <div class="component" draggable="true">Due Diligence</div>
 
-        <div style="font-weight:bold; color:#a9d1f1; margin-top:16px;">Organizational & Operational Terms</div>
+        <div style="font-weight:bold; color:#250325; margin-top:16px;">Organizational & Operational Terms</div>
         <div class="component" draggable="true">Organizational Standards</div>
         <div class="component" draggable="true">Roles and Responsibilities</div>
         <div class="component" draggable="true">Authority</div>
@@ -726,7 +710,7 @@
         <div class="component" draggable="true">Efficiency</div>
         <div class="component" draggable="true">Performance</div>
 
-        <div style="font-weight:bold; color:#add1ee; margin-top:16px;">Documentation & Process Terms</div>
+        <div style="font-weight:bold; color:#250325; margin-top:16px;">Documentation & Process Terms</div>
         <div class="component" draggable="true">Define</div>
         <div class="component" draggable="true">Document</div>
         <div class="component" draggable="true">Approve</div>
@@ -739,7 +723,7 @@
         <div class="component" draggable="true">Retention</div>
         <div class="component" draggable="true">Archiving</div>
 
-        <div style="font-weight:bold; color:#a7d4fa; margin-top:16px;">Risk & Security Terms</div>
+        <div style="font-weight:bold; color:#250325; margin-top:16px;">Risk & Security Terms</div>
         <div class="component" draggable="true">Risk</div>
         <div class="component" draggable="true">Mitigation</div>
         <div class="component" draggable="true">Assessment</div>
@@ -753,7 +737,7 @@
         <div class="component" draggable="true">Integrity</div>
         <div class="component" draggable="true">Availability</div>
 
-        <div style="font-weight:bold; color:#a4cae9; margin-top:16px;">Quality & Improvement</div>
+        <div style="font-weight:bold; color:#250325; margin-top:16px;">Quality & Improvement</div>
         <div class="component" draggable="true">Quality Assurance</div>
         <div class="component" draggable="true">Continuous Improvement</div>
         <div class="component" draggable="true">Benchmarking</div>
@@ -814,14 +798,14 @@
     <!-- Component Delete Confirmation Modal -->
     <div id="compDeleteOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.55); 
      align-items:center; justify-content:center; z-index:1000;">
-      <div style="background:#23263a; color:#e6eefc; padding:24px; border-radius:12px; 
+      <div style="background:#ecd0f3; color:#e6eefc; padding:24px; border-radius:12px; 
               box-shadow:0 12px 36px rgba(0,0,0,0.5); width:340px; text-align:center;">
-        <h3 style="margin-top:0; color:#90caf9;">Delete Component?</h3>
-        <p style="font-size:0.95em; color:#a3a7c2;">Are you sure you want to delete this component permanently?</p>
+        <h3 style="margin-top:0; color:#27022c;">Delete Component?</h3>
+        <p style="font-size:0.95em; color:#27022c;">Are you sure you want to delete this component permanently?</p>
         <div style="display:flex; justify-content:center; gap:12px; margin-top:18px;">
-          <button id="confirmDeleteCompBtn" style="background:linear-gradient(90deg,#2AF598,#009EFD); border:none; color:#05102a; 
+          <button id="confirmDeleteCompBtn" style="background:rgb(62, 2, 70); border:none; color:#ffffff; 
               padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;">Delete</button>
-          <button id="cancelDeleteCompBtn" style="background:#2b2f3a; border:none; color:#e6eefc; 
+          <button id="cancelDeleteCompBtn" style="background:#c75353; border:none; color:#17001a; 
               padding:10px 18px; border-radius:8px; font-weight:700; cursor:pointer;">Cancel</button>
         </div>
       </div>
@@ -859,33 +843,61 @@
       const componentsList = document.getElementById('componentsList');
       const editorBox = document.getElementById('editorBox');
 
-      function attachDrag(el) {
-        el.addEventListener('dragstart', e => {
-          e.dataTransfer.setData('text/plain', el.textContent);
-        });
-      }
+// Replace your existing attachDrag with this function
+function attachDrag(el) {
+  el.addEventListener('dragstart', e => {
+    // Try to read the visible component name from .comp-name if present
+    const nameSpan = el.querySelector && el.querySelector('.comp-name');
+    let name = '';
+
+    if (nameSpan) {
+      name = nameSpan.textContent.trim();
+    } else {
+      // fallback: take element text but remove the '✕' char and extra whitespace
+      name = (el.textContent || '').replace(/✕/g, '').trim();
+    }
+
+    // Put only the plain name into dataTransfer (text/plain)
+    e.dataTransfer.setData('text/plain', name);
+    // optionally set drag image: e.dataTransfer.setDragImage(el, 10, 10);
+  });
+}
+
+
       componentsList.querySelectorAll('.component').forEach(attachDrag);
 
-      editorBox.addEventListener('dragover', e => e.preventDefault());
-      editorBox.addEventListener('drop', e => {
-        e.preventDefault();
-        const text = e.dataTransfer.getData('text/plain') || '';
-        // insert text at caret
-        const sel = window.getSelection();
-        if (!sel.rangeCount) {
-          editorBox.appendChild(document.createTextNode(text));
-          return;
-        }
-        const range = sel.getRangeAt(0);
-        range.deleteContents();
-        const node = document.createTextNode(text);
-        range.insertNode(node);
-        // move caret after inserted node
-        range.setStartAfter(node);
-        range.setEndAfter(node);
-        sel.removeAllRanges();
-        sel.addRange(range);
-      });
+     // drop handler: insert only plain text and keep caret in sensible place
+editorBox.addEventListener('dragover', e => e.preventDefault());
+editorBox.addEventListener('drop', e => {
+  e.preventDefault();
+  let text = e.dataTransfer.getData('text/plain') || '';
+  text = text.replace(/✕/g, '').trim(); // extra safety: strip any stray '✕'
+
+  if (!text) return;
+
+  // Add a trailing space so words don't jam together
+  const insertText = text + ' ';
+
+  const sel = window.getSelection();
+  if (!sel.rangeCount) {
+    editorBox.appendChild(document.createTextNode(insertText));
+    return;
+  }
+  const range = sel.getRangeAt(0);
+  range.deleteContents();
+  const node = document.createTextNode(insertText);
+  range.insertNode(node);
+
+  // Move caret after the inserted node
+  range.setStartAfter(node);
+  range.setEndAfter(node);
+  sel.removeAllRanges();
+  sel.addRange(range);
+
+  // Scroll into view if needed
+  node.parentElement && node.parentElement.scrollIntoView({ block: 'nearest' });
+});
+
 
       // --- Template dropdown (simple placeholders) ---
       const templateSelect = document.getElementById('templateSelect');
@@ -900,7 +912,7 @@
         const v = e.target.value;
         if (!templates[v]) return;
         // render template, convert [EMPTY] to input-like inline spans
-        const html = templates[v].replace(/\[EMPTY\]/g, "<span contenteditable='true' class='tfield' style='display:inline-block; min-width:70px; line-height:2em; height:2em; padding:2px 2px; background:#0b1320; border-radius:3px; margin:0 6px; border:1px solid #2c3a5a; vertical-align:middle; overflow:hidden;'></span>");
+        const html = templates[v].replace(/\[EMPTY\]/g, "<span contenteditable='true' class='tfield' style='display:inline-block; min-width:70px; line-height:2em; height:2em; padding:2px 2px; background:white; border-radius:3px; margin:0 6px; border:1px solid #2c3a5a; vertical-align:middle; overflow:hidden;'></span>");
         editorBox.innerHTML = "<p style='margin:0;'>" + html + "</p>";
       });
 
@@ -908,27 +920,29 @@
       const saveBtn = document.getElementById('saveStatement');
       const savedList = document.getElementById('savedStatements');
 
-      saveBtn.addEventListener('click', async () => {
-        const content = editorBox.innerHTML.trim();
-        if (!content) { alert('Editor is empty'); return; }
-        try {
-          const res = await fetch('/save_statement', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content })
-          });
-          const data = await res.json();
-          if (data.success) {
-            // Add to saved list top
-            const d = document.createElement('div');
-            d.className = 'saved-item'; d.dataset.id = data.id;
-            d.innerHTML = "<div class='statement-content'>" + data.content + "</div><button class='delete-saved-btn'>&#10006;</button>";
-            savedList.prepend(d);
-            // attach delete click handled by delegated listener below
-            alert('Saved');
-          } else {
-            alert('Save failed');
-          }
-        } catch (err) { console.error(err); alert('Server error'); }
-      });
+     saveBtn.addEventListener('click', async () => {
+  const content = editorBox.innerHTML.trim();
+  if (!content) { alert('Editor is empty'); return; }
+  try {
+    const res = await fetch('/save_statement', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content })
+    });
+    const data = await res.json();
+    if (data.success) {
+      // Add to saved list top
+      const d = document.createElement('div');
+      d.className = 'saved-item'; d.dataset.id = data.id;
+      d.innerHTML = "<div class='statement-content'>" + data.content + "</div><button class='delete-saved-btn'>&#10006;</button>";
+      savedList.prepend(d);
+      // Disable editables in this new saved item
+      disableSavedEditables(d);
+      // attach delete click handled by delegated listener below
+      alert('Saved');
+    } else {
+      alert('Save failed');
+    }
+  } catch (err) { console.error(err); alert('Server error'); }
+});
 
       // --- Delete confirm modal (delegated) ---
       const confirmOverlay = document.getElementById('confirmOverlay');
@@ -940,22 +954,24 @@
       let toDeleteElem = null;
 
       savedList.addEventListener('click', e => {
-        const target = e.target;
-        const btn = target.classList.contains('delete-saved-btn') ? target : target.closest('.delete-saved-btn');
-        if (btn) {
-          toDeleteElem = btn.parentElement;
-          // show modal
-          confirmOverlay.style.display = 'block';
-          confirmCard.style.display = 'block';
-          confirmYes.checked = false; confirmNo.checked = false;
-        }
-        // click on statement content loads it
-        const contentDiv = target.classList.contains('statement-content') ? target : target.closest('.statement-content');
-        if (contentDiv && !target.classList.contains('delete-saved-btn')) {
-          editorBox.innerHTML = contentDiv.innerHTML;
-        }
-      });
-
+  const target = e.target;
+  const btn = target.classList.contains('delete-saved-btn') ? target : target.closest('.delete-saved-btn');
+  if (btn) {
+    toDeleteElem = btn.parentElement;
+    // show modal
+    confirmOverlay.style.display = 'block';
+    confirmCard.style.display = 'block';
+    confirmYes.checked = false; confirmNo.checked = false;
+  }
+  // click on statement content loads it
+  const contentDiv = target.classList.contains('statement-content') ? target : target.closest('.statement-content');
+  if (contentDiv && !target.classList.contains('delete-saved-btn')) {
+    editorBox.innerHTML = contentDiv.innerHTML;
+    // Enable editables in the editor box
+    const editorFields = editorBox.querySelectorAll('.tfield');
+    editorFields.forEach(field => field.setAttribute('contenteditable', 'true'));
+  }
+});
       cancelDelete.addEventListener('click', hideConfirm);
       confirmOverlay.addEventListener('click', hideConfirm);
 
@@ -992,31 +1008,41 @@
       modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.style.display = 'none'; });
 
       saveComponentBtn.addEventListener('click', async () => {
-        const name = newComponentInput.value.trim();
-        if (!name) { alert('Enter component name'); return; }
-        try {
-          const res = await fetch('/save_component', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) });
-          const data = await res.json();
-          if (data.success) {
-            const el = document.createElement('div');
-            el.className = 'component';
-            el.draggable = true;
-            el.dataset.id = data.id;
-            el.innerHTML = `<span class="comp-name">${data.name}</span>
-                  <button class="delete-component-btn" title="Delete component">✕</button>`;
-            // Attach delete popup trigger
-            el.querySelector('.delete-component-btn').addEventListener('click', () => {
-              showCompDeletePopup(data.id, el);
-            });
-
-            componentsList.prepend(el);
-            attachDrag(el);
-            newComponentInput.value = '';
-            modalOverlay.style.display = 'none';
-          } else alert('Save failed');
-
-        } catch (e) { console.error(e); alert('Server error'); }
+  const name = newComponentInput.value.trim();
+  if (!name) {
+    alert('Enter component name');
+    return;
+  }
+  try {
+    const res = await fetch('/save_component', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name })
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      const el = document.createElement('div');
+      el.className = 'component';
+      el.draggable = true;
+      el.dataset.id = data.id;
+      el.innerHTML = `<span class="comp-name">${data.name}</span>
+            <button class="delete-component-btn" title="Delete component">✕</button>`;
+      el.querySelector('.delete-component-btn').addEventListener('click', () => {
+        showCompDeletePopup(data.id, el);
       });
+
+      componentsList.prepend(el);
+      attachDrag(el);
+      newComponentInput.value = '';
+      modalOverlay.style.display = 'none';
+    } else {
+      alert('Failed to create component. Please try again or check the server response.');
+    }
+  } catch (e) {
+    console.error('Error creating component:', e);
+    alert('An error occurred while creating the component. Please try again later.');
+  }
+});
 
       // Delete user-created component (delegated)
       // --- Component Delete Popup Logic ---
@@ -1164,6 +1190,17 @@
         window.open('{{ url_for("templates_page") }}', '_blank');
       });
 
+      // Function to disable editables in a specific saved item
+function disableSavedEditables(item) {
+  const fields = item.querySelectorAll('.tfield');
+  fields.forEach(field => field.removeAttribute('contenteditable'));
+}
+
+// Disable for all existing saved items on page load
+document.addEventListener('DOMContentLoaded', function() {
+  const savedItems = document.querySelectorAll('#savedStatements .saved-item');
+  savedItems.forEach(item => disableSavedEditables(item));
+});
     </script>
 
 

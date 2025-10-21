@@ -3,98 +3,120 @@
 <head>
   <meta charset="utf-8">
   <title>Reset Password - GRC Statements</title>
-  <style>
-  :root {
-    --neon-cyan: #00e0ff;
-    --neon-pink: #ff00f7;
-    --bg-dark: #0a0f1f;
-    --bg-gradient: linear-gradient(135deg, #0a0f1f, #102542);
-    --text-light: #eaf6ff;
-  }
+<style>
+:root {
+  --deep-purple: #1c0634;
+  --accent-purple: #ae00ff;
+  --soft-bg: linear-gradient(135deg, #f8f5ff, #efe7ff);
+  --text-dark: #120027;
+  --card-bg: rgba(237, 227, 255, 0.9);
+}
 
-  body {
-    font-family: "Inter", sans-serif;
-    background: var(--bg-gradient);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    color: var(--text-light);
-    animation: fadeIn 0.6s ease-in-out;
-  }
+/* Body */
+body {
+  font-family: "Inter", "Roboto", sans-serif;
+  background: var(--soft-bg);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-dark);
+  animation: fadeIn 0.6s ease-in-out;
+}
 
-  .card {
-    width: 360px;
-    background: rgba(16, 24, 48, 0.9);
-    border-radius: 14px;
-    padding: 30px;
-    box-shadow: 0 0 25px rgba(255, 0, 247, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    animation: popupIn 0.4s ease-out;
-  }
+/* Card */
+.card {
+  width: 380px;
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 0 25px rgba(174, 0, 255, 0.15);
+  border: 1px solid rgba(174, 0, 255, 0.2);
+  backdrop-filter: blur(12px);
+  text-align: center;
+  animation: popupIn 0.4s ease-out;
+}
 
-  h2 {
-    margin: 0 0 16px;
-    color: var(--neon-cyan);
-    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-pink);
-  }
+/* Headings */
+h2 {
+  color: var(--deep-purple);
+  margin-bottom: 16px;
+  text-shadow: 0 0 10px rgba(174, 0, 255, 0.3);
+  font-size: 24px;
+  font-weight: 700;
+}
 
-  input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #30363d;
-    margin-top: 8px;
-    background: rgba(15, 22, 40, 0.9);
-    color: var(--text-light);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 8px rgba(0, 224, 255, 0.15);
-  }
+/* Input fields */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(28, 6, 52, 0.3);
+  background: #e7d7ff;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(174, 0, 255, 0.1);
+}
 
-  input:focus {
-    border-color: var(--neon-pink);
-    box-shadow: 0 0 12px var(--neon-pink);
-    outline: none;
-  }
+input:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 20px rgba(174, 0, 255, 0.3);
+  outline: none;
+  background: #f3e9ff;
+}
 
-  .btn {
-    margin-top: 18px;
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 0 15px rgba(255, 0, 247, 0.2);
-  }
+/* Button */
+.btn {
+  margin-top: 18px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, var(--deep-purple), var(--accent-purple));
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(174, 0, 255, 0.25);
+}
 
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 25px var(--neon-pink);
-  }
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(174, 0, 255, 0.5);
+}
 
-  .error {
-    margin-top: 10px;
-    color: #ff6b6b;
-    text-shadow: 0 0 6px #ff6b6b;
-  }
+/* Links & error text */
+a {
+  color: var(--accent-purple);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+a:hover {
+  text-shadow: 0 0 10px var(--deep-purple);
+}
 
-  @keyframes popupIn {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
-  }
+.error {
+  color: #ff4d6d;
+  margin-top: 10px;
+  text-shadow: 0 0 8px rgba(255, 77, 109, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popupIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 </style>
+
 
 </head>
 <body>
