@@ -3,7 +3,7 @@
 ## 1. Clone the Repository
 First, clone this project from GitHub:
 ```
-git clone https://github.com/<your-username>/grc0app.git
+git clone https://github.com/Myst3rious-5/grc0app.git
 ```
 
 Then move into the project folder:
