@@ -1,6 +1,7 @@
-🚀 GRC Statements — Setup & Run Guide
+# GRC Statements
+# Setup & Run Guide
 
-1. Clone the Repository
+## 1. Clone the Repository
 First, clone this project from GitHub:
 
 `git clone https://github.com/<your-username>/grc0app.git`
@@ -11,7 +12,7 @@ Then move into the project folder:
 
 ---------------------------------------------------------------------------------------------
 
-2. Set Up Python Environment:
+## 2. Set Up Python Environment:
 Make sure you have Python 3.8+ installed.
 Check your version:
 
@@ -32,7 +33,7 @@ Mac/Linux:
 
 ---------------------------------------------------------------------------------------------
 
-3. Install Required Packages
+## 3. Install Required Packages
 All dependencies are listed in your requirements.txt.
 Run this command inside the project folder:
 
@@ -43,12 +44,10 @@ This installs Flask and any other needed modules.
 ---------------------------------------------------------------------------------------------
 
 
-5. Run the Application
+## 4. Run the Application
 Now, start your Flask app using:
 
 `python app.py`
-
----------------------------------------------------------------------------------------------
 
 If you’re on macOS/Linux, you might use:
 
@@ -63,7 +62,7 @@ You’ll see output like:
 ---------------------------------------------------------------------------------------------
 
 
-6. Open in Browser
+## 5. Open in Browser
 
 Once running, open your web browser and go to:
 
