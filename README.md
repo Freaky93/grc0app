@@ -43,7 +43,7 @@ This installs Flask and any other needed modules.
 ---------------------------------------------------------------------------------------------
 
 
-▶5. Run the Application
+5. Run the Application
 Now, start your Flask app using:
 
 `python app.py`
